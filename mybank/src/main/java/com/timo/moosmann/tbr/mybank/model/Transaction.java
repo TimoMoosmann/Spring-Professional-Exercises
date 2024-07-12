@@ -1,17 +1,20 @@
 package com.timo.moosmann.tbr.mybank.model;
 
-import java.sql.Timestamp;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.ZonedDateTime;
 
 public class Transaction {
     private String id;
     private Integer amount;
-    private Timestamp timestamp;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+    private ZonedDateTime timestamp;
     private String reference;
 
     public Transaction(
             String id,
             Integer amount,
-            Timestamp timestamp,
+            ZonedDateTime timestamp,
             String reference
     ) {
         this.id = id;
@@ -36,11 +39,11 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public Timestamp getTimestamp() {
+    public ZonedDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(ZonedDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
