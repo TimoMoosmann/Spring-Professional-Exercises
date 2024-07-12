@@ -8,12 +8,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 public class MyBankServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (req.getRequestURI().equalsIgnoreCase("/transactions")) {
-            resp.getWriter().print("TODO: Show transactions");
+            List<Transaction> transactions = Application.transactionService.findAll();
+            resp.getWriter().print(Application.objectMapper.writeValueAsString(transactions));
         } else {
             resp.setStatus(404);
         }

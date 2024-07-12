@@ -27,4 +27,8 @@ public class TransactionService {
 
         return transaction;
     }
+
+    public List<Transaction> findAll() {
+        return this.transactions;
+    }
 }
