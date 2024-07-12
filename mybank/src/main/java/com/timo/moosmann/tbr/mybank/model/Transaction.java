@@ -7,7 +7,7 @@ import java.time.ZonedDateTime;
 public class Transaction {
     private String id;
     private Integer amount;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mmZ")
     private ZonedDateTime timestamp;
     private String reference;
 
