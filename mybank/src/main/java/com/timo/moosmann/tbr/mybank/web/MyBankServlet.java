@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class MyBankServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (req.getRequestURI().equalsIgnoreCase("/transactions")) {
             resp.getWriter().print("TODO: Show transactions");
         } else {
