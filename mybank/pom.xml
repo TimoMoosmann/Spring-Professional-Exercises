@@ -11,6 +11,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <version>11.0.0-M22</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.17.1</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -25,7 +40,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.timo.moosmann.tbr.ApplicationLauncher</mainClass>
+                            <mainClass>com.timo.moosmann.tbr.mybank.ApplicationLauncher</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
