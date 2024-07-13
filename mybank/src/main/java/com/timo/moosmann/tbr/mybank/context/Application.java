@@ -1,4 +1,4 @@
-package com.timo.moosmann.tbr.mybank;
+package com.timo.moosmann.tbr.mybank.context;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

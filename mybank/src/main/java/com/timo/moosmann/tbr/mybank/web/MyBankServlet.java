@@ -1,6 +1,6 @@
 package com.timo.moosmann.tbr.mybank.web;
 
-import com.timo.moosmann.tbr.mybank.Application;
+import com.timo.moosmann.tbr.mybank.context.Application;
 import com.timo.moosmann.tbr.mybank.model.Transaction;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
