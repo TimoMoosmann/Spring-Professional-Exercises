@@ -2,11 +2,8 @@ package com.timo.moosmann.tbr.mybank.service;
 
 import com.timo.moosmann.tbr.mybank.model.Transaction;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TransactionService {
@@ -16,11 +13,9 @@ public class TransactionService {
             Integer amount,
             String reference
     ) {
-        String id = UUID.randomUUID().toString();
         ZonedDateTime timestamp = ZonedDateTime.now();
 
         Transaction transaction = new Transaction(
-                id,
                 amount,
                 timestamp,
                 reference

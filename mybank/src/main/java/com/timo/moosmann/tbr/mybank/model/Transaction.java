@@ -3,6 +3,7 @@ package com.timo.moosmann.tbr.mybank.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class Transaction {
     private String id;
@@ -12,12 +13,11 @@ public class Transaction {
     private String reference;
 
     public Transaction(
-            String id,
             Integer amount,
             ZonedDateTime timestamp,
             String reference
     ) {
-        this.id = id;
+        this.id = UUID.randomUUID().toString();
         this.amount = amount;
         this.timestamp = timestamp;
         this.reference = reference;
