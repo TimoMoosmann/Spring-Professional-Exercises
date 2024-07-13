@@ -15,6 +15,8 @@ public class MyBankServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (req.getRequestURI().equalsIgnoreCase("/transactions")) {
             List<Transaction> transactions = Application.transactionService.findAll();
+
+            resp.setContentType("application/json; charset=UTF-8");
             resp.getWriter().print(Application.objectMapper.writeValueAsString(transactions));
         } else {
             resp.setStatus(404);
@@ -32,6 +34,7 @@ public class MyBankServlet extends HttpServlet {
                     reference
             );
 
+            resp.setContentType("application/json; charset=UTF-8");
             resp.getWriter().print(Application.objectMapper.writeValueAsString(transaction));
         } else {
             resp.setStatus(404);
