@@ -19,9 +19,9 @@ public class MyBankServlet extends HttpServlet {
 
     @Override
     public void init() {
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-        ctx.register(MyBankConfiguration.class);
-        ctx.refresh();
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
+                MyBankConfiguration.class
+        );
 
         this.transactionService = ctx.getBean(TransactionService.class);
         this.objectMapper = ctx.getBean(ObjectMapper.class);
