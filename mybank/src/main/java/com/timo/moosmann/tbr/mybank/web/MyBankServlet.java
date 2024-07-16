@@ -1,10 +1,9 @@
 package com.timo.moosmann.tbr.mybank.web;
 
-import com.timo.moosmann.tbr.mybank.context.Application;
-import com.timo.moosmann.tbr.mybank.context.SpringConfiguration;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.timo.moosmann.tbr.mybank.context.MyBankConfiguration;
 import com.timo.moosmann.tbr.mybank.model.Transaction;
 import com.timo.moosmann.tbr.mybank.service.TransactionService;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,14 +15,16 @@ import java.util.List;
 public class MyBankServlet extends HttpServlet {
 
     private TransactionService transactionService;
+    private ObjectMapper objectMapper;
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-        ctx.register(SpringConfiguration.class);
+        ctx.register(MyBankConfiguration.class);
         ctx.refresh();
 
         this.transactionService = ctx.getBean(TransactionService.class);
+        this.objectMapper = ctx.getBean(ObjectMapper.class);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class MyBankServlet extends HttpServlet {
             List<Transaction> transactions = transactionService.findAll();
 
             resp.setContentType("application/json; charset=UTF-8");
-            resp.getWriter().print(Application.objectMapper.writeValueAsString(transactions));
+            resp.getWriter().print(objectMapper.writeValueAsString(transactions));
         } else {
             resp.setStatus(404);
         }
@@ -50,7 +51,7 @@ public class MyBankServlet extends HttpServlet {
             );
 
             resp.setContentType("application/json; charset=UTF-8");
-            resp.getWriter().print(Application.objectMapper.writeValueAsString(transaction));
+            resp.getWriter().print(objectMapper.writeValueAsString(transaction));
         } else {
             resp.setStatus(404);
         }
