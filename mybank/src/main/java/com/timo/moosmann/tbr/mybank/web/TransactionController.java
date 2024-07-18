@@ -1,9 +1,11 @@
 package com.timo.moosmann.tbr.mybank.web;
 
+import com.timo.moosmann.tbr.mybank.dto.TransactionRequestBody;
 import com.timo.moosmann.tbr.mybank.model.Transaction;
 import com.timo.moosmann.tbr.mybank.service.TransactionService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,11 +24,11 @@ public class TransactionController {
         return transactionService.findAll();
     }
 
-    /*
-    @PostMapping("/transaction")
-    public Transaction createTransaction() {
-
+    @PostMapping("/transactions")
+    public Transaction createTransaction(@RequestBody TransactionRequestBody transactionRequestBody) {
+        return transactionService.createTransaction(
+                transactionRequestBody.getAmount(),
+                transactionRequestBody.getReference()
+        );
     }
-
-     */
 }
