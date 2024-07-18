@@ -1,8 +1,6 @@
 package com.timo.moosmann.tbr.mybank;
 
-import com.timo.moosmann.tbr.mybank.context.MyBankConfiguration;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletRegistration;
+import com.timo.moosmann.tbr.mybank.context.ApplicationConfiguration;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.Wrapper;
@@ -49,7 +47,7 @@ public class ApplicationLauncher {
 
     private static AnnotationConfigWebApplicationContext loadSpringWebApplicationConfiguration() {
         AnnotationConfigWebApplicationContext springContext = new AnnotationConfigWebApplicationContext();
-        springContext.register(MyBankConfiguration.class);
+        springContext.register(ApplicationConfiguration.class);
 
         return springContext;
     }
