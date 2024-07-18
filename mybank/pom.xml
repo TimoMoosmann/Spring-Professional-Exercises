@@ -37,6 +37,12 @@
             <artifactId>spring-context</artifactId>
             <version>6.1.10</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>6.1.10</version>
+        </dependency>
     </dependencies>
 
     <build>
