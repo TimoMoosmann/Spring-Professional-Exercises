@@ -3,6 +3,7 @@ package com.timo.moosmann.tbr.mybank.web;
 import com.timo.moosmann.tbr.mybank.dto.TransactionRequestBody;
 import com.timo.moosmann.tbr.mybank.model.Transaction;
 import com.timo.moosmann.tbr.mybank.service.TransactionService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ public class TransactionController {
     }
 
     @PostMapping("/transactions")
-    public Transaction createTransaction(@RequestBody TransactionRequestBody transactionRequestBody) {
+    public Transaction createTransaction(@RequestBody @Valid TransactionRequestBody transactionRequestBody) {
         return transactionService.createTransaction(
                 transactionRequestBody.getAmount(),
                 transactionRequestBody.getReference()
