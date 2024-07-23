@@ -7,18 +7,21 @@ import java.util.UUID;
 
 public class Transaction {
     private String id;
+    private String userId;
     private Integer amount;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mmZ")
     private ZonedDateTime timestamp;
     private String reference, slogan;
 
     public Transaction(
+            String userId,
             Integer amount,
             ZonedDateTime timestamp,
             String reference,
             String slogan
     ) {
         this.id = UUID.randomUUID().toString();
+        this.userId = userId;
         this.amount = amount;
         this.timestamp = timestamp;
         this.reference = reference;
@@ -63,5 +66,13 @@ public class Transaction {
 
     public void setSlogan(String slogan) {
         this.slogan = slogan;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

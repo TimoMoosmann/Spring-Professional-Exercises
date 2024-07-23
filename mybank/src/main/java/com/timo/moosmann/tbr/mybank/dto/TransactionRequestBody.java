@@ -1,11 +1,12 @@
 package com.timo.moosmann.tbr.mybank.dto;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class TransactionRequestBody {
+
+    @NotBlank
+    @Size(min = 2, max = 10)
+    private String userId;
 
     @NotNull
     @Size(min= 2, max = 20)
@@ -29,5 +30,13 @@ public class TransactionRequestBody {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public @NotBlank @Size(min = 2, max = 10) String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(@NotBlank @Size(min = 2, max = 10) String userId) {
+        this.userId = userId;
     }
 }
