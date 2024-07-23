@@ -1,11 +1,12 @@
 package com.timo.moosmann.tbr.mybank.dto;
 
+import com.timo.moosmann.tbr.mybank.web.validation.user_exists_constraint.UserExists;
 import jakarta.validation.constraints.*;
 
 public class TransactionRequestBody {
 
     @NotBlank
-    @Size(min = 2, max = 10)
+    @UserExists
     private String userId;
 
     @NotNull

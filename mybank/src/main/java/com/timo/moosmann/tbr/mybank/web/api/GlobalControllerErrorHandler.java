@@ -1,4 +1,4 @@
-package com.timo.moosmann.tbr.mybank.web;
+package com.timo.moosmann.tbr.mybank.web.api;
 
 import com.timo.moosmann.tbr.mybank.model.ValidationError;
 import org.springframework.http.HttpStatus;
