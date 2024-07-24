@@ -1,6 +1,7 @@
 package com.timo.moosmann.tbr.mybank.service;
 
 import com.timo.moosmann.tbr.mybank.model.Transaction;
+import com.timo.moosmann.tbr.mybank.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -18,16 +19,16 @@ public class TransactionService {
     }
 
     public Transaction createTransaction(
-            String receivingUserId,
-            String sendingUserId,
+            User receivingUser,
+            User sendingUser,
             Integer amount,
             String reference
     ) {
         ZonedDateTime timestamp = ZonedDateTime.now();
 
         Transaction transaction = new Transaction(
-                receivingUserId,
-                sendingUserId,
+                receivingUser,
+                sendingUser,
                 amount,
                 timestamp,
                 reference,
@@ -44,7 +45,7 @@ public class TransactionService {
 
     public List<Transaction> findAll(String userId) {
         return this.transactions.stream().filter(
-                transaction -> transaction.getSendingUserId().equals(userId)
+                transaction -> transaction.getSendingUser().id().equals(userId)
         ).toList();
     }
 }

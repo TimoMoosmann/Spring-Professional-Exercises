@@ -2,6 +2,7 @@ package com.timo.moosmann.tbr.mybank.web.api;
 
 import com.timo.moosmann.tbr.mybank.dto.TransactionRequestBody;
 import com.timo.moosmann.tbr.mybank.model.Transaction;
+import com.timo.moosmann.tbr.mybank.model.User;
 import com.timo.moosmann.tbr.mybank.service.TransactionService;
 import com.timo.moosmann.tbr.mybank.service.UserService;
 import jakarta.validation.Valid;
@@ -33,9 +34,12 @@ public class TransactionController {
 
     @PostMapping("/transactions")
     public Transaction createTransaction(@RequestBody @Valid TransactionRequestBody transactionRequestBody) {
+        User sendingUser = userService.find(transactionRequestBody.getSendingUserId());
+        User receivingUser = userService.find(transactionRequestBody.getReceivingUserId());
+
         return transactionService.createTransaction(
-                transactionRequestBody.getSendingUserId(),
-                transactionRequestBody.getReceivingUserId(),
+                sendingUser,
+                receivingUser,
                 transactionRequestBody.getAmount(),
                 transactionRequestBody.getReference()
         );

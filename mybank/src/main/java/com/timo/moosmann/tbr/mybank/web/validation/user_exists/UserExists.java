@@ -1,4 +1,4 @@
-package com.timo.moosmann.tbr.mybank.web.validation.user_exists_constraint;
+package com.timo.moosmann.tbr.mybank.web.validation.user_exists;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

@@ -1,6 +1,6 @@
 package com.timo.moosmann.tbr.mybank.dto;
 
-import com.timo.moosmann.tbr.mybank.web.validation.user_exists_constraint.UserExists;
+import com.timo.moosmann.tbr.mybank.web.validation.user_exists.UserExists;
 import jakarta.validation.constraints.*;
 
 public class TransactionRequestBody {

@@ -8,26 +8,26 @@ import java.util.UUID;
 
 public class Transaction {
     private String id;
-    @JsonProperty("sending_user_id")
-    private String sendingUserId;
-    @JsonProperty("receiving_user_id")
-    private String receivingUserId;
+    @JsonProperty("sending_user")
+    private User sendingUser;
+    @JsonProperty("receiving_user")
+    private User receivingUser;
     private Integer amount;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mmZ")
     private ZonedDateTime timestamp;
     private String reference, slogan;
 
     public Transaction(
-            String sendingUserId,
-            String receivingUserId,
+            User sendingUser,
+            User receivingUser,
             Integer amount,
             ZonedDateTime timestamp,
             String reference,
             String slogan
     ) {
         this.id = UUID.randomUUID().toString();
-        this.sendingUserId = sendingUserId;
-        this.receivingUserId = receivingUserId;
+        this.sendingUser = sendingUser;
+        this.receivingUser = receivingUser;
         this.amount = amount;
         this.timestamp = timestamp;
         this.reference = reference;
@@ -74,19 +74,19 @@ public class Transaction {
         this.slogan = slogan;
     }
 
-    public String getSendingUserId() {
-        return sendingUserId;
+    public User getSendingUser() {
+        return sendingUser;
     }
 
-    public void setSendingUserId(String sendingUserId) {
-        this.sendingUserId = sendingUserId;
+    public void setSendingUser(User sendingUser) {
+        this.sendingUser = sendingUser;
     }
 
-    public String getReceivingUserId() {
-        return receivingUserId;
+    public User getReceivingUser() {
+        return receivingUser;
     }
 
-    public void setReceivingUserId(String receivingUserId) {
-        this.receivingUserId = receivingUserId;
+    public void setReceivingUser(User receivingUser) {
+        this.receivingUser = receivingUser;
     }
 }

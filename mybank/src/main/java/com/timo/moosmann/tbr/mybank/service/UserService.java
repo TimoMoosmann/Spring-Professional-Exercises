@@ -31,7 +31,7 @@ public class UserService {
     }
 
     public boolean doesExist(String userId) {
-        List<String> userIds = users.stream().map(User::getId).toList();
+        List<String> userIds = users.stream().map(User::id).toList();
         return userIds.contains(userId);
     }
 
@@ -41,7 +41,7 @@ public class UserService {
         }
 
         return users.stream().filter(
-                user -> user.getId().equals(userId)
+                user -> user.id().equals(userId)
         ).toList().get(0);
     }
 }

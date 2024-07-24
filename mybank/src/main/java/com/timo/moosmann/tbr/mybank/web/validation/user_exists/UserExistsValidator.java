@@ -1,11 +1,9 @@
-package com.timo.moosmann.tbr.mybank.web.validation.user_exists_constraint;
+package com.timo.moosmann.tbr.mybank.web.validation.user_exists;
 
 import com.timo.moosmann.tbr.mybank.service.UserService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.lang.annotation.Annotation;
 
 public class UserExistsValidator implements ConstraintValidator<UserExists, String> {
 
