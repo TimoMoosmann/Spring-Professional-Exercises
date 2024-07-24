@@ -7,7 +7,11 @@ public class TransactionRequestBody {
 
     @NotBlank
     @UserExists
-    private String userId;
+    private String sendingUserId;
+
+    @NotBlank
+    @UserExists
+    private String receivingUserId;
 
     @NotNull
     @Size(min= 2, max = 20)
@@ -33,11 +37,19 @@ public class TransactionRequestBody {
         this.amount = amount;
     }
 
-    public @NotBlank @Size(min = 2, max = 10) String getUserId() {
-        return userId;
+    public @NotBlank @Size(min = 2, max = 10) String getSendingUserId() {
+        return sendingUserId;
     }
 
-    public void setUserId(@NotBlank @Size(min = 2, max = 10) String userId) {
-        this.userId = userId;
+    public void setSendingUserId(@NotBlank @Size(min = 2, max = 10) String sendingUserId) {
+        this.sendingUserId = sendingUserId;
+    }
+
+    public @NotBlank String getReceivingUserId() {
+        return receivingUserId;
+    }
+
+    public void setReceivingUserId(@NotBlank String receivingUserId) {
+        this.receivingUserId = receivingUserId;
     }
 }

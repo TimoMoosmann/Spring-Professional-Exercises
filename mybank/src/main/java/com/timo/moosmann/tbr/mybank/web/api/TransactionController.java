@@ -34,7 +34,8 @@ public class TransactionController {
     @PostMapping("/transactions")
     public Transaction createTransaction(@RequestBody @Valid TransactionRequestBody transactionRequestBody) {
         return transactionService.createTransaction(
-                transactionRequestBody.getUserId(),
+                transactionRequestBody.getSendingUserId(),
+                transactionRequestBody.getReceivingUserId(),
                 transactionRequestBody.getAmount(),
                 transactionRequestBody.getReference()
         );

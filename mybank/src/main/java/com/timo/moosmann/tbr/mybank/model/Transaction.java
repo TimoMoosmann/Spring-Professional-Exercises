@@ -1,27 +1,33 @@
 package com.timo.moosmann.tbr.mybank.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class Transaction {
     private String id;
-    private String userId;
+    @JsonProperty("sending_user_id")
+    private String sendingUserId;
+    @JsonProperty("receiving_user_id")
+    private String receivingUserId;
     private Integer amount;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mmZ")
     private ZonedDateTime timestamp;
     private String reference, slogan;
 
     public Transaction(
-            String userId,
+            String sendingUserId,
+            String receivingUserId,
             Integer amount,
             ZonedDateTime timestamp,
             String reference,
             String slogan
     ) {
         this.id = UUID.randomUUID().toString();
-        this.userId = userId;
+        this.sendingUserId = sendingUserId;
+        this.receivingUserId = receivingUserId;
         this.amount = amount;
         this.timestamp = timestamp;
         this.reference = reference;
@@ -68,11 +74,19 @@ public class Transaction {
         this.slogan = slogan;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getSendingUserId() {
+        return sendingUserId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSendingUserId(String sendingUserId) {
+        this.sendingUserId = sendingUserId;
+    }
+
+    public String getReceivingUserId() {
+        return receivingUserId;
+    }
+
+    public void setReceivingUserId(String receivingUserId) {
+        this.receivingUserId = receivingUserId;
     }
 }

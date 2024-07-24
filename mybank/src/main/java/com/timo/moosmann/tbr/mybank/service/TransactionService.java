@@ -18,14 +18,16 @@ public class TransactionService {
     }
 
     public Transaction createTransaction(
-            String userId,
+            String receivingUserId,
+            String sendingUserId,
             Integer amount,
             String reference
     ) {
         ZonedDateTime timestamp = ZonedDateTime.now();
 
         Transaction transaction = new Transaction(
-                userId,
+                receivingUserId,
+                sendingUserId,
                 amount,
                 timestamp,
                 reference,
@@ -42,7 +44,7 @@ public class TransactionService {
 
     public List<Transaction> findAll(String userId) {
         return this.transactions.stream().filter(
-                transaction -> transaction.getUserId().equals(userId)
+                transaction -> transaction.getSendingUserId().equals(userId)
         ).toList();
     }
 }
