@@ -19,16 +19,16 @@ public class TransactionService {
     }
 
     public Transaction createTransaction(
-            User receivingUser,
             User sendingUser,
+            User receivingUser,
             Integer amount,
             String reference
     ) {
         ZonedDateTime timestamp = ZonedDateTime.now();
 
         Transaction transaction = new Transaction(
-                receivingUser,
                 sendingUser,
+                receivingUser,
                 amount,
                 timestamp,
                 reference,
