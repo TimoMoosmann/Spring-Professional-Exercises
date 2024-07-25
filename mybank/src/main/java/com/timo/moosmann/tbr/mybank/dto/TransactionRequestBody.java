@@ -19,6 +19,7 @@ public class TransactionRequestBody {
 
     @Min(1)
     @Max(1000)
+    @NotNull
     private Integer amount;
 
     public String getReference() {
@@ -37,19 +38,19 @@ public class TransactionRequestBody {
         this.amount = amount;
     }
 
-    public @NotBlank @Size(min = 2, max = 10) String getSendingUserId() {
+    public String getSendingUserId() {
         return sendingUserId;
     }
 
-    public void setSendingUserId(@NotBlank @Size(min = 2, max = 10) String sendingUserId) {
+    public void setSendingUserId(String sendingUserId) {
         this.sendingUserId = sendingUserId;
     }
 
-    public @NotBlank String getReceivingUserId() {
+    public String getReceivingUserId() {
         return receivingUserId;
     }
 
-    public void setReceivingUserId(@NotBlank String receivingUserId) {
+    public void setReceivingUserId(String receivingUserId) {
         this.receivingUserId = receivingUserId;
     }
 }

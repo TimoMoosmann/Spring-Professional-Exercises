@@ -19,7 +19,7 @@ public class TransactionController {
     private final TransactionService transactionService;
     private final UserService userService;
 
-    TransactionController(
+    public TransactionController(
             TransactionService transactionService,
             UserService userService
     ) {

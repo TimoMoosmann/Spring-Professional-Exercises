@@ -1,5 +1,6 @@
 package com.timo.moosmann.tbr.mybank.service;
 
+import com.timo.moosmann.tbr.mybank.exceptions.UserNotFoundException;
 import com.timo.moosmann.tbr.mybank.model.User;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ public class UserService {
 
     public User find(String userId) {
         if (!this.doesExist(userId)) {
-            throw new RuntimeException("User with id " + userId + " doesn't exist.");
+            return null;
         }
 
         return users.stream().filter(

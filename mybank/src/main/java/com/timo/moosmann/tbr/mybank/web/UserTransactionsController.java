@@ -1,6 +1,6 @@
 package com.timo.moosmann.tbr.mybank.web;
 
-import com.timo.moosmann.tbr.mybank.dto.UserTransaction;
+import com.timo.moosmann.tbr.mybank.dto.UserTransactionForm;
 import com.timo.moosmann.tbr.mybank.exceptions.UserNotFoundException;
 import com.timo.moosmann.tbr.mybank.model.Transaction;
 import com.timo.moosmann.tbr.mybank.model.User;
@@ -16,12 +16,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/account/{userId}/transactions")
-public class UserController {
+public class UserTransactionsController {
 
     private final TransactionService transactionService;
     private final UserService userService;
 
-    public UserController(
+    public UserTransactionsController(
             TransactionService transactionService,
             UserService userService
     ) {
@@ -31,27 +31,26 @@ public class UserController {
 
     @ModelAttribute("user")
     public User populateUser(@PathVariable("userId") String userId) throws UserNotFoundException {
-        if (!userService.doesExist(userId)) {
+        User user = userService.find(userId);
+
+        if (user == null) {
             throw new UserNotFoundException(userId);
         }
-        return userService.find(userId);
+
+        return user;
     }
 
     @ModelAttribute("userTransactions")
     public List<Transaction> populateUserTransactions(
             @PathVariable("userId") String userId
-    ) throws UserNotFoundException {
-        if (!userService.doesExist(userId)) {
-            throw new UserNotFoundException(userId);
-        }
-
+    ) {
         return transactionService.findAll(userId);
     }
 
     @GetMapping
     public String transactions(
             Model model,
-            @ModelAttribute("newTransaction") UserTransaction newTransaction,
+            @ModelAttribute("newTransaction") UserTransactionForm newTransaction,
             @PathVariable("userId") String userId
     ) {
         return "userTransactions";
@@ -59,7 +58,7 @@ public class UserController {
 
     @PostMapping
     public String addTransaction(
-            @ModelAttribute("newTransaction") @Valid UserTransaction newTransaction,
+            @ModelAttribute("newTransaction") @Valid UserTransactionForm newTransaction,
             BindingResult bindingResult,
             Model model,
             @PathVariable("userId") String userId

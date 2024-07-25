@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
-public final class UserTransaction {
+public final class UserTransactionForm {
     @NotBlank
     @UserExists
     private String receivingUserId;
@@ -19,10 +19,10 @@ public final class UserTransaction {
     @Size(min = 2)
     private String reference;
 
-    public UserTransaction() {
+    public UserTransactionForm() {
     }
 
-    public UserTransaction(
+    public UserTransactionForm(
             String receivingUserId,
             Integer amount,
             java.lang.String reference
@@ -60,7 +60,7 @@ public final class UserTransaction {
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (UserTransaction) obj;
+        var that = (UserTransactionForm) obj;
         return Objects.equals(this.receivingUserId, that.receivingUserId) &&
                 Objects.equals(this.amount, that.amount) &&
                 Objects.equals(this.reference, that.reference);
