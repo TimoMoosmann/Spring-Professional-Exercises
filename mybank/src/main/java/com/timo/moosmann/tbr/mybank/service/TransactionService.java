@@ -46,6 +46,7 @@ public class TransactionService {
     public List<Transaction> findAll(String userId) {
         return this.transactions.stream().filter(
                 transaction -> transaction.getSendingUser().id().equals(userId)
+                || transaction.getReceivingUser().id().equals(userId)
         ).toList();
     }
 }

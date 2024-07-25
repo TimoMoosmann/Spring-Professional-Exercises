@@ -54,5 +54,11 @@ public class MainSeeder {
                 700,
                 "Organic Fruits and Vegetables"
         );
+        transactionService.createTransaction(
+                miles,
+                john,
+                50,
+                "Debt for dinner yesterday"
+        );
     }
 }

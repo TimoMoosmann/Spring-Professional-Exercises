@@ -17,6 +17,7 @@
 <table>
     <thead>
     <tr>
+        <th>Sender</th>
         <th>Receiver</th>
         <th>Amount</th>
         <th>Reference</th>
@@ -25,6 +26,7 @@
     </thead>
     <tbody>
     <tr th:each="transaction : ${userTransactions}">
+        <td th:text="${transaction.sendingUser.fullName}"></td>
         <td th:text="${transaction.receivingUser.fullName}"></td>
         <td th:text="${transaction.amount}"></td>
         <td th:text="${transaction.reference}"></td>
