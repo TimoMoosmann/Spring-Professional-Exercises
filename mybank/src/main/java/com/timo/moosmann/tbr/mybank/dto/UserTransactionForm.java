@@ -16,7 +16,7 @@ public final class UserTransactionForm {
     @Min(1)
     private Integer amount;
     @NotBlank
-    @Size(min = 2)
+    @Size(min = 2, max = 50)
     private String reference;
 
     public UserTransactionForm() {

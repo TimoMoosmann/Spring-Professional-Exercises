@@ -14,11 +14,10 @@ public class TransactionRequestBody {
     private String receivingUserId;
 
     @NotNull
-    @Size(min= 2, max = 20)
+    @Size(min= 2, max = 50)
     private String reference;
 
     @Min(1)
-    @Max(1000)
     @NotNull
     private Integer amount;
 
