@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
@@ -23,10 +24,15 @@ public class ApplicationConfiguration {
     @Bean
     public DataSource dataSource() {
         JdbcDataSource jdbcDataSource = new JdbcDataSource();
-        jdbcDataSource.setURL("jdbc:h2:~/db;INIT=RUNSCRIPT FROM 'classpath:schema.sql'");
+        jdbcDataSource.setURL("jdbc:h2:~/db/mybank;INIT=RUNSCRIPT FROM 'classpath:schema.sql'");
         jdbcDataSource.setUser("sa");
         jdbcDataSource.setPassword("sa");
         return jdbcDataSource;
+    }
+
+    @Bean
+    public JdbcTemplate jdbcTemplate() {
+        return new JdbcTemplate(dataSource());
     }
 
     @Bean

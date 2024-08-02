@@ -1,7 +1,7 @@
 package com.timo.moosmann.tbr.mybank.service;
 
-import com.timo.moosmann.tbr.mybank.exceptions.UserNotFoundException;
 import com.timo.moosmann.tbr.mybank.model.User;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,15 +13,30 @@ public class UserService {
 
     private List<User> users = new CopyOnWriteArrayList<>();
 
+    private final JdbcTemplate jdbcTemplate;
+
+    public UserService(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     public User create(
-            String id,
+            String username,
             String firstName,
             String lastName
     ) {
-        // todo: Check if userId already exists
+        LocalDateTime created = LocalDateTime.now();
+
+       int id = jdbcTemplate.update(
+                "INSERT INTO users (username, first_name, last_name, created) VALUES (?, ?, ?, ?)",
+                username,
+                firstName,
+                lastName,
+                created
+        );
 
         User user = new User(
                 id,
+                username,
                 firstName,
                 lastName,
                 LocalDateTime.now()
@@ -31,18 +46,18 @@ public class UserService {
         return user;
     }
 
-    public boolean doesExist(String userId) {
-        List<String> userIds = users.stream().map(User::id).toList();
-        return userIds.contains(userId);
+    public boolean doesExist(String username) {
+        List<String> usernames = users.stream().map(User::username).toList();
+        return usernames.contains(username);
     }
 
-    public User find(String userId) {
-        if (!this.doesExist(userId)) {
+    public User find(String username) {
+        if (!this.doesExist(username)) {
             return null;
         }
 
         return users.stream().filter(
-                user -> user.id().equals(userId)
+                user -> user.username().equals(username)
         ).toList().get(0);
     }
 }

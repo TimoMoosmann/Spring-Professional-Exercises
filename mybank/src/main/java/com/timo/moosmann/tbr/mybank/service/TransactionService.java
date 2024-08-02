@@ -43,10 +43,10 @@ public class TransactionService {
         return this.transactions;
     }
 
-    public List<Transaction> findAll(String userId) {
+    public List<Transaction> findAll(String username) {
         return this.transactions.stream().filter(
-                transaction -> transaction.getSendingUser().id().equals(userId)
-                || transaction.getReceivingUser().id().equals(userId)
+                transaction -> transaction.getSendingUser().username().equals(username)
+                || transaction.getReceivingUser().username().equals(username)
         ).toList();
     }
 }
