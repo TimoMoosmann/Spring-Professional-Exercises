@@ -6,12 +6,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class UserService {
-
-    private List<User> users = new CopyOnWriteArrayList<>();
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -34,21 +31,27 @@ public class UserService {
                 created
         );
 
-        User user = new User(
+        return new User(
                 id,
                 username,
                 firstName,
                 lastName,
                 LocalDateTime.now()
         );
-        users.add(user);
-
-        return user;
     }
 
     public boolean doesExist(String username) {
-        List<String> usernames = users.stream().map(User::username).toList();
-        return usernames.contains(username);
+        Integer users = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM users WHERE username = ?",
+                Integer.class,
+                username
+        );
+
+        if (users == null) {
+            return false;
+        }
+
+        return users > 0;
     }
 
     public User find(String username) {
@@ -56,8 +59,31 @@ public class UserService {
             return null;
         }
 
-        return users.stream().filter(
-                user -> user.username().equals(username)
-        ).toList().get(0);
+        return jdbcTemplate.queryForObject(
+                "SELECT * FROM users WHERE username = ?",
+                (rs, rowNum) ->  {
+                   return new User(
+                            rs.getInt("id"),
+                            rs.getString("username"),
+                            rs.getString("first_name"),
+                            rs.getString("last_name"),
+                            rs.getObject("created", LocalDateTime.class)
+                    );
+                },
+                username
+        );
+    }
+
+    public List<User> findAll() {
+        return jdbcTemplate.query(
+                "SELECT * FROM users",
+                (rs, rowNum) -> new User(
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getObject("created", LocalDateTime.class)
+                )
+        );
     }
 }

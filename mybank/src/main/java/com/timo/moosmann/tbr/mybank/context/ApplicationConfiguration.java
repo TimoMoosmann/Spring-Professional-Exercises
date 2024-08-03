@@ -24,7 +24,7 @@ public class ApplicationConfiguration {
     @Bean
     public DataSource dataSource() {
         JdbcDataSource jdbcDataSource = new JdbcDataSource();
-        jdbcDataSource.setURL("jdbc:h2:~/db/mybank;INIT=RUNSCRIPT FROM 'classpath:schema.sql'");
+        jdbcDataSource.setURL("jdbc:h2:~/db/mybank");
         jdbcDataSource.setUser("sa");
         jdbcDataSource.setPassword("sa");
         return jdbcDataSource;

@@ -4,10 +4,9 @@ import com.timo.moosmann.tbr.mybank.dto.UserRequestBody;
 import com.timo.moosmann.tbr.mybank.model.User;
 import com.timo.moosmann.tbr.mybank.service.UserService;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/account")
@@ -27,5 +26,10 @@ public class UserRestController {
                 userRequestBody.firstName(),
                 userRequestBody.lastName()
         );
+    }
+
+    @GetMapping
+    public List<User> getUsers() {
+        return userService.findAll();
     }
 }
