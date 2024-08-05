@@ -41,6 +41,18 @@ public class MainSeeder {
                 );
                 """);
 
+        jdbcTemplate.execute("DROP TABLE IF EXISTS transactions");
+        jdbcTemplate.execute("""
+                CREATE TABLE transactions(
+                    id SERIAL,
+                    sending_user_id INT,
+                    receiving_user_id INT,
+                    amount INT,
+                    reference TINYTEXT NOT NULL,
+                    created DATETIME
+                );
+                """);
+
         User john = userService.create(
                 "john1",
                 "John",

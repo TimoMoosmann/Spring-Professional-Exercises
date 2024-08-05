@@ -44,7 +44,7 @@ public class UserTransactionsController {
     public List<Transaction> populateUserTransactions(
             @PathVariable("userId") String userId
     ) {
-        return transactionService.findAll(userId);
+        return transactionService.findAllOfUser(userId);
     }
 
     @GetMapping

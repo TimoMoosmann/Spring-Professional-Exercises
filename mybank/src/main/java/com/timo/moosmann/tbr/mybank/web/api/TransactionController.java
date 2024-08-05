@@ -29,7 +29,7 @@ public class TransactionController {
 
     @GetMapping("/transactions")
     public List<Transaction> index() {
-        return transactionService.findAll();
+        return transactionService.findAllOfUser();
     }
 
     @PostMapping("/transactions")

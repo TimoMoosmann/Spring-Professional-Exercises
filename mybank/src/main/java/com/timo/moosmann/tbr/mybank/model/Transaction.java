@@ -3,43 +3,35 @@ package com.timo.moosmann.tbr.mybank.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.ZonedDateTime;
-import java.util.UUID;
+import java.time.LocalDateTime;
 
 public class Transaction {
-    private String id;
+    private int id;
     @JsonProperty("sending_user")
     private User sendingUser;
     @JsonProperty("receiving_user")
     private User receivingUser;
     private Integer amount;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mmZ")
-    private ZonedDateTime timestamp;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime timestamp;
     private String reference, slogan;
 
     public Transaction(
+            int id,
             User sendingUser,
             User receivingUser,
             Integer amount,
-            ZonedDateTime timestamp,
+            LocalDateTime timestamp,
             String reference,
             String slogan
     ) {
-        this.id = UUID.randomUUID().toString();
+        this.id = id;
         this.sendingUser = sendingUser;
         this.receivingUser = receivingUser;
         this.amount = amount;
         this.timestamp = timestamp;
         this.reference = reference;
         this.slogan = slogan;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Integer getAmount() {
@@ -50,11 +42,11 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public ZonedDateTime getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(ZonedDateTime timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -88,5 +80,13 @@ public class Transaction {
 
     public void setReceivingUser(User receivingUser) {
         this.receivingUser = receivingUser;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
