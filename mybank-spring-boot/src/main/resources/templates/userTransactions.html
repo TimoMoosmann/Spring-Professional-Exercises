@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Transactions</title>
+
+<style>
+    form {
+        margin-top: 1rem;
+    }
+</style>
+</head>
+<body>
+<h2>Hello <span th:text="${user.firstName}">User</span></h2>
+<h3>Here are your transactions:</h3>
+
+<table>
+    <thead>
+    <tr>
+        <th>Sender</th>
+        <th>Receiver</th>
+        <th>Amount</th>
+        <th>Reference</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="transaction : ${userTransactions}">
+        <td th:text="${transaction.sendingUser.fullName}"></td>
+        <td th:text="${transaction.receivingUser.fullName}"></td>
+        <td th:text="${transaction.amount}"></td>
+        <td th:text="${transaction.reference}"></td>
+        <td th:text="${#temporals.format(transaction.timestamp, 'dd/MMM/yyyy HH:mm')}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<form th:action="@{/account/{userId}/transactions(userId=${userId})}" method="post" th:object="${newTransaction}">
+    <div>
+        <label for="amount">Amount:</label>
+        <input id="amount" type="number" th:field="*{amount}"/>
+
+        <p th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" style="background-color:red">Invalid Amount</p>
+    </div>
+    <div>
+        <label for="reference">Reference:</label>
+        <input id="reference" type="text" th:field="*{reference}"/>
+
+        <p th:if="${#fields.hasErrors('reference')}" th:errors="*{reference}" style="background-color:red">Invalid Reference</p>
+    </div>
+    <div>
+        <label for="receivingUserId">Id of receiving User:</label>
+        <input id="receivingUserId" type="text" th:field="*{receivingUserId}"/>
+
+        <p th:if="${#fields.hasErrors('receivingUserId')}" th:errors="*{receivingUserId}" style="background-color:red">Invalid User Id</p>
+    </div>
+
+    <input type="submit" value="Create">
+</form>
+
+</body>
+</html>
